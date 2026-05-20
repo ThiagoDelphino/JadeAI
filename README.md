@@ -1,149 +1,188 @@
-# 🤖 Agente Financeiro Inteligente com IA Generativa
+## 💚 Jade — Sua Educadora Financeira com IA
 
-## Contexto
+> *"Sou a Jade, sua educadora financeira. Vou te explicar sobre finanças como uma amiga!"*
 
-Os assistentes virtuais no setor financeiro estão evoluindo de simples chatbots reativos para **agentes inteligentes e proativos**. Neste desafio, você vai idealizar e prototipar um agente financeiro que utiliza IA Generativa para:
-
-- **Antecipar necessidades** ao invés de apenas responder perguntas
-- **Personalizar** sugestões com base no contexto de cada cliente
-- **Cocriar soluções** financeiras de forma consultiva
-- **Garantir segurança** e confiabilidade nas respostas (anti-alucinação)
-
-> [!TIP]
-> Na pasta [`examples/`](./examples/) você encontra referências de implementação para cada etapa deste desafio.
+![Interface da Jade](assets/image.png)
 
 ---
 
-## O Que Você Deve Entregar
+## 🧠 O que é a Jade?
 
-### 1. Documentação do Agente
+A **Jade** é uma agente de IA educacional voltada para **finanças pessoais**. Ela foi criada para ajudar pessoas que têm dificuldades com conceitos financeiros básicos — como reserva de emergência, tipos de investimentos e organização de gastos — de forma simples, personalizada e acessível.
 
-Defina **o que** seu agente faz e **como** ele funciona:
-
-- **Caso de Uso:** Qual problema financeiro ele resolve? (ex: consultoria de investimentos, planejamento de metas, alertas de gastos)
-- **Persona e Tom de Voz:** Como o agente se comporta e se comunica?
-- **Arquitetura:** Fluxo de dados e integração com a base de conhecimento
-- **Segurança:** Como evitar alucinações e garantir respostas confiáveis?
-
-📄 **Template:** [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+Diferente de um consultor financeiro tradicional, a Jade **não recomenda investimentos**. Ela **ensina** como eles funcionam, usando os próprios dados do cliente como exemplos práticos e didáticos. Pense nela como uma professora particular jovem e descontraída, que fala a sua língua.
 
 ---
 
-### 2. Base de Conhecimento
+## 🎯 Problema que resolve
 
-Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alimentar seu agente:
+Muitas pessoas têm dinheiro parado, dívidas acumuladas ou simplesmente não sabem como começar a investir — não por falta de interesse, mas por falta de **educação financeira acessível**. Conteúdos sobre finanças costumam ser técnicos demais, genéricos demais ou fora da realidade do usuário.
 
-| Arquivo | Formato | Descrição |
-|---------|---------|-----------|
-| `transacoes.csv` | CSV | Histórico de transações do cliente |
-| `historico_atendimento.csv` | CSV | Histórico de atendimentos anteriores |
-| `perfil_investidor.json` | JSON | Perfil e preferências do cliente |
-| `produtos_financeiros.json` | JSON | Produtos e serviços disponíveis |
-
-Você pode adaptar ou expandir esses dados conforme seu caso de uso.
-
-📄 **Template:** [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
+A Jade resolve isso ao combinar:
+- Linguagem simples e informal (como uma conversa de verdade)
+- Contexto personalizado com os dados reais do usuário
+- Postura educativa, nunca prescritiva
 
 ---
 
-### 3. Prompts do Agente
+## ✨ Funcionalidades
 
-Documente os prompts que definem o comportamento do seu agente:
-
-- **System Prompt:** Instruções gerais de comportamento e restrições
-- **Exemplos de Interação:** Cenários de uso com entrada e saída esperada
-- **Tratamento de Edge Cases:** Como o agente lida com situações limite
-
-📄 **Template:** [`docs/03-prompts.md`](./docs/03-prompts.md)
+- **Explicações personalizadas** — usa o perfil, histórico de transações e atendimentos anteriores do cliente para contextualizar as respostas
+- **Educação sem julgamento** — explica conceitos como CDI, Selic, Tesouro Direto, FIIs e Renda Fixa de forma descomplicada
+- **Análise de gastos didática** — mostra padrões de consumo e explica estratégias de organização
+- **Limites éticos bem definidos** — não recomenda investimentos, não acessa dados sensíveis e admite quando não sabe algo
+- **Foco no escopo** — redireciona perguntas fora do tema de finanças pessoais de forma educada
 
 ---
 
-### 4. Aplicação Funcional
+## 🏗️ Arquitetura
 
-Desenvolva um **protótipo funcional** do seu agente:
+```mermaid
+flowchart TD
+    A[Cliente] -->|Mensagem| B[Interface Streamlit]
+    B --> C[LLM via Ollama]
+    C --> D[Base de Conhecimento]
+    D --> C
+    C --> E[Validação Anti-Alucinação]
+    E --> F[Resposta da Jade]
+```
 
-- Chatbot interativo (sugestão: Streamlit, Gradio ou similar)
-- Integração com LLM (via API ou modelo local)
-- Conexão com a base de conhecimento
-
-📁 **Pasta:** [`src/`](./src/)
-
----
-
-### 5. Avaliação e Métricas
-
-Descreva como você avalia a qualidade do seu agente:
-
-**Métricas Sugeridas:**
-- Precisão/assertividade das respostas
-- Taxa de respostas seguras (sem alucinações)
-- Coerência com o perfil do cliente
-
-📄 **Template:** [`docs/04-metricas.md`](./docs/04-metricas.md)
+| Componente | Tecnologia |
+|---|---|
+| Interface | [Streamlit](https://streamlit.io/) |
+| LLM | [Ollama](https://ollama.ai/) (`gpt-oss:20b`) |
+| Base de Conhecimento | JSON e CSV injetados no contexto |
+| Linguagem | Python |
 
 ---
 
-### 6. Pitch
+## 🗃️ Base de Conhecimento
 
-Grave um **pitch de 3 minutos** (estilo elevador) apresentando:
+A Jade utiliza quatro fontes de dados do cliente para personalizar suas respostas:
 
-- Qual problema seu agente resolve?
-- Como ele funciona na prática?
-- Por que essa solução é inovadora?
+| Arquivo | Formato | Função |
+|---|---|---|
+| `perfil_investidor.json` | JSON | Perfil, renda, objetivos e metas do cliente |
+| `transacoes.csv` | CSV | Histórico de transações para análise de gastos |
+| `historico_atendimento.csv` | CSV | Contexto de interações anteriores |
+| `produtos_financeiros.json` | JSON | Produtos disponíveis para ensino (Tesouro Selic, CDB, LCI/LCA, FII, Fundo de Ações) |
 
-📄 **Template:** [`docs/05-pitch.md`](./docs/05-pitch.md)
-
----
-
-## Ferramentas Sugeridas
-
-Todas as ferramentas abaixo possuem versões gratuitas:
-
-| Categoria | Ferramentas |
-|-----------|-------------|
-| **LLMs** | [ChatGPT](https://chat.openai.com/), [Copilot](https://copilot.microsoft.com/), [Gemini](https://gemini.google.com/), [Claude](https://claude.ai/), [Ollama](https://ollama.ai/) |
-| **Desenvolvimento** | [Streamlit](https://streamlit.io/), [Gradio](https://www.gradio.app/), [Google Colab](https://colab.research.google.com/) |
-| **Orquestração** | [LangChain](https://www.langchain.com/), [LangFlow](https://www.langflow.org/), [CrewAI](https://www.crewai.com/) |
-| **Diagramas** | [Mermaid](https://mermaid.js.org/), [Draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/) |
+> Os dados são injetados diretamente no prompt, garantindo que a Jade tenha o contexto completo do cliente a cada conversa.
 
 ---
 
-## Estrutura do Repositório
+## 🛡️ Segurança e Anti-Alucinação
+
+A Jade foi projetada com responsabilidade em mente:
+
+- ✅ Usa **apenas os dados fornecidos** no contexto — sem inventar informações
+- ✅ **Nunca recomenda investimentos específicos** — apenas explica como funcionam
+- ✅ **Admite limitações** com transparência: *"Não tenho essa informação, mas posso explicar..."*
+- ✅ **Não acessa dados sensíveis** (senhas, dados de terceiros, etc.)
+- ✅ **Foca exclusivamente em educação financeira** — recusa perguntas fora do escopo
+
+---
+
+## 💬 Exemplos de Interação
+
+**Pergunta conceitual:**
+> 🧑 "O que é um CDI?"
+>
+> 💚 Jade: *"CDI é uma taxa de referência usada pelos bancos. Quando um investimento rende '100% do CDI', significa que ele acompanha essa taxa. Hoje o CDI está próximo da Selic. Quer que eu explique a diferença entre os dois?"*
+
+**Análise de gastos:**
+> 🧑 "Onde estou gastando mais?"
+>
+> 💚 Jade: *"Olhando suas transações de outubro, sua maior despesa é moradia (R$ 1.380), seguida de alimentação (R$ 570). Juntas, representam quase 80% dos seus gastos. Isso é bem comum! Quer que eu explique algumas estratégias de organização?"*
+
+**Pergunta fora do escopo:**
+> 🧑 "Qual a previsão do tempo para amanhã?"
+>
+> 💚 Jade: *"Sou especializada em finanças e não tenho informações sobre previsão do tempo. Posso ajudar com algo relacionado às suas finanças?"*
+
+---
+
+## 🚀 Como Rodar
+
+### Pré-requisitos
+
+- Python 3.8+
+- [Ollama](https://ollama.com) instalado
+
+### Passo a passo
+
+```bash
+# 1. Baixar o modelo
+ollama pull gpt-oss
+
+# 2. Garantir que o Ollama está rodando
+ollama serve
+
+# 3. Instalar dependências Python
+pip install streamlit pandas requests
+
+# 4. Rodar a aplicação
+streamlit run ./src/app.py        # Linux/Mac
+streamlit run .\src\app.py        # Windows
+```
+
+Acesse em `http://localhost:8501` 🎉
+
+---
+
+## 📁 Estrutura do Repositório
 
 ```
-📁 lab-agente-financeiro/
+📁 JadeAI/
 │
 ├── 📄 README.md
 │
-├── 📁 data/                          # Dados mockados para o agente
-│   ├── historico_atendimento.csv     # Histórico de atendimentos (CSV)
-│   ├── perfil_investidor.json        # Perfil do cliente (JSON)
-│   ├── produtos_financeiros.json     # Produtos disponíveis (JSON)
-│   └── transacoes.csv                # Histórico de transações (CSV)
+├── 📁 data/
+│   ├── perfil_investidor.json
+│   ├── produtos_financeiros.json
+│   ├── transacoes.csv
+│   └── historico_atendimento.csv
 │
-├── 📁 docs/                          # Documentação do projeto
-│   ├── 01-documentacao-agente.md     # Caso de uso e arquitetura
-│   ├── 02-base-conhecimento.md       # Estratégia de dados
-│   ├── 03-prompts.md                 # Engenharia de prompts
-│   ├── 04-metricas.md                # Avaliação e métricas
-│   └── 05-pitch.md                   # Roteiro do pitch
+├── 📁 src/
+│   └── app.py
 │
-├── 📁 src/                           # Código da aplicação
-│   └── app.py                        # (exemplo de estrutura)
+├── 📁 assets/
+│   └── image.png
 │
-├── 📁 assets/                        # Imagens e diagramas
-│   └── ...
-│
-└── 📁 examples/                      # Referências e exemplos
-    └── README.md
+└── 📁 docs/
+    ├── 01-documentacao-agente.md
+    ├── 02-base-conhecimento.md
+    ├── 03-prompts.md
+    ├── 04-metricas.md
+    └── 05-pitch.md
 ```
 
 ---
 
-## Dicas Finais
+## 🧪 Métricas de Qualidade
 
-1. **Comece pelo prompt:** Um bom system prompt é a base de um agente eficaz
-2. **Use os dados mockados:** Eles garantem consistência e evitam problemas com dados sensíveis
-3. **Foque na segurança:** No setor financeiro, evitar alucinações é crítico
-4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
-5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
+| Métrica | O que avalia |
+|---|---|
+| **Assertividade** | A Jade respondeu corretamente ao que foi perguntado? |
+| **Segurança** | Evitou inventar informações fora do contexto? |
+| **Coerência** | A resposta faz sentido para o perfil do cliente? |
+
+---
+
+## 🔮 Próximos Passos
+
+- [ ] Carregamento dinâmico dos dados (substituir injeção estática no prompt)
+- [ ] Suporte a múltiplos perfis de cliente
+- [ ] Histórico de conversa persistente na sessão
+- [ ] Observabilidade com ferramentas como [LangWatch](https://langwatch.ai/) ou [LangFuse](https://langfuse.com/)
+- [ ] Interface mais rica com gráficos de gastos
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Thiago Sousa Delphino** como projeto de agente financeiro com IA Generativa.
+
+---
+
+> ⚠️ **Aviso:** A Jade é uma ferramenta educacional. Ela não substitui um profissional certificado em finanças. Sempre consulte um especialista antes de tomar decisões financeiras importantes.
