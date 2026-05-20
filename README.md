@@ -184,5 +184,8 @@ Acesse em `http://localhost:8501` 🎉
 Desenvolvido por **Thiago Sousa Delphino** como projeto de agente financeiro com IA Generativa.
 
 ---
+## 🎥 Video Pitch
+[Video Pitch Jade AI](https://youtu.be/_ZvqY-aiY3g)
 
+---
 > ⚠️ **Aviso:** A Jade é uma ferramenta educacional. Ela não substitui um profissional certificado em finanças. Sempre consulte um especialista antes de tomar decisões financeiras importantes.
