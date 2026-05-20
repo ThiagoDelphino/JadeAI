@@ -32,19 +32,16 @@ O produto Imobiliário (FII) substituiu o Fundo Multimercado
 Para simplificar, podemos simplesmente "injetar" os dados em nosso prompt, garantindo que o Agente tenha o melhor contexto possível. Lembrando que , em soluçoes mais robustas, o ideal é que essas informaçoes sejam carregadas dinamicamente para que possamos ganhar felxibilidade.
 
 ```python
-import panda as pd
+
 import json
+import pandas as pd
 
-# CSVs
-historico = pd.read_csv('data/historico_atendimetno.csv')
-transacoes = pd.read_csv('data/transacoes.csv')
 
-# JSONs
-whit open('data/perfil_investidor.json','r', encoding='utf-8') as f:
-perfil = json.load(f)
-
-whit open('data/produtos_financeiros.json','r', encoding='utf-8') as f:
-produtos = json.load(f)
+# =======  CARREGAR DADOS =========
+perfil = json.load(open('./data/perfil_investidor.json'))
+transacoes = pd.read_csv('./data/transacoes.csv')
+historico = pd.read_csv('./data/historico_atendimento.csv')
+produtos = json.load(open('./data/produtos_financeiros.json'))
 ```
 
 ### Como os dados são usados no prompt?
